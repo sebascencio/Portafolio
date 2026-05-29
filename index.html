@@ -74,10 +74,11 @@ nav{
 /* Hamburger button */
 .nav-hamburger{
   display:none;flex-direction:column;justify-content:center;gap:5px;
-  width:36px;height:36px;background:transparent;border:1px solid var(--border);
-  border-radius:8px;cursor:pointer;padding:0 8px;
+  width:40px;height:40px;background:var(--surface2);border:1px solid var(--border);
+  border-radius:8px;cursor:pointer;padding:8px 9px;
+  flex-shrink:0;
 }
-.nav-hamburger span{display:block;height:2px;background:var(--accent);border-radius:2px;transition:all 0.3s}
+.nav-hamburger span{display:block;height:2px;width:100%;background:var(--accent);border-radius:2px;transition:all 0.3s}
 
 /* Mobile drawer */
 .nav-drawer{
@@ -152,11 +153,11 @@ h1.hero-title{
   font-size:1.05rem;color:var(--text-muted);
   line-height:1.7;margin-bottom:0;
 }
-/* Stats card */
+/* Stats card optimized for 3 elements */
 .hero-stats-card{
   background:var(--surface);border:1px solid var(--border);
   border-radius:20px;padding:1.8rem;
-  display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;
+  display:grid;grid-template-columns:repeat(3, 1fr);gap:1.5rem;
 }
 .hstat{text-align:center}
 .hstat-num{
@@ -298,8 +299,8 @@ section{padding:7rem 4rem;position:relative}
 
 /* Charts */
 .chart-row{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-top:1.5rem}
-.chart-box{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:1.5rem}
-.chart-box h5{font-family:'Syne',sans-serif;font-size:0.85rem;margin-bottom:1.2rem;color:var(--text)}
+.chart-box{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:1.5rem;overflow:hidden}
+.chart-box h5{font-family:'Syne',sans-serif;font-size:0.85rem;margin-bottom:1rem;color:var(--text)}
 .mini-chart{width:100%;height:80px;position:relative}
 .bar-chart{display:flex;align-items:flex-end;gap:6px;height:80px}
 .bar{flex:1;border-radius:4px 4px 0 0;background:linear-gradient(180deg,var(--accent),rgba(0,229,160,0.3));position:relative;transition:height 1.2s ease}
@@ -367,7 +368,7 @@ section{padding:7rem 4rem;position:relative}
 .contact-link span{font-size:1rem}
 
 /* Line graph SVG */
-.line-graph{width:100%;overflow:visible}
+.line-graph{width:100%;height:auto;display:block}
 
 /* Footer */
 footer{border-top:1px solid var(--border);padding:2rem 4rem;display:flex;justify-content:space-between;align-items:center;font-size:0.8rem;color:var(--text-muted)}
@@ -395,24 +396,26 @@ footer{border-top:1px solid var(--border);padding:2rem 4rem;display:flex;justify
   .nav-right{display:none}
   .nav-hamburger{display:flex}
 
-  /* Hero mobile: single column */
+  /* Hero mobile: single column layout */
   #hero{padding:6rem 1.4rem 3rem;align-items:flex-start}
   .hero-inner{grid-template-columns:1fr;gap:2rem}
   .hero-right{gap:1.2rem}
   h1.hero-title{font-size:3rem}
-  .hero-stats-card{grid-template-columns:1fr 1fr;gap:1rem;padding:1.2rem}
+  
+  /* Mobile adaptation for stats: stays consistent in a single column block list or custom grid flow */
+  .hero-stats-card{grid-template-columns:1fr;gap:1rem;padding:1.2rem}
   .hstat-num{font-size:1.6rem}
 
   /* Sections */
   section{padding:4rem 1.4rem}
   #contact{padding:4rem 1rem}
-  .contact-box{padding:2.5rem 1.5rem}
-  .contact-box h2{font-size:clamp(1.4rem,7vw,2rem) !important}
+  .contact-box{padding:2.5rem 1.2rem}
+  .contact-box h2{font-size:clamp(1.35rem,6vw,1.9rem) !important;padding:0 0.5rem}
 
   /* About */
   .about-grid{grid-template-columns:1fr;gap:2.5rem}
 
-  /* Clients tabs: all in a row, wrap */
+  /* Clients tabs */
   .clients-nav{gap:0.6rem}
   .client-tab{padding:0.5rem 1rem;font-size:0.78rem}
 
@@ -436,7 +439,7 @@ footer{border-top:1px solid var(--border);padding:2rem 4rem;display:flex;justify
   /* Skills */
   .skills-grid{grid-template-columns:1fr}
 
-  /* Keyword table — hide volume col on small screens */
+  /* Keyword table */
   .kw-table th:nth-child(3),.kw-table td:nth-child(3){display:none}
 
   .hero-scroll{display:none}
@@ -451,13 +454,8 @@ footer{border-top:1px solid var(--border);padding:2rem 4rem;display:flex;justify
 <!-- NAV -->
 <nav>
   <div class="nav-logo">
-    <svg width="52" height="44" viewBox="0 0 52 44" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:block;flex-shrink:0">
-      <defs><clipPath id="glass-clip"><circle cx="19" cy="21" r="11.5"/></clipPath></defs>
-      <circle cx="19" cy="21" r="13" stroke="#00e5a0" stroke-width="3" fill="rgba(0,229,160,0.06)"/>
-      <polyline points="11,27 15.5,19 20,23 25,14" stroke="#00e5a0" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" fill="none" clip-path="url(#glass-clip)"/>
-      <polyline points="22.5,13 25,14 23.5,16.5" stroke="#00e5a0" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" fill="none" clip-path="url(#glass-clip)"/>
-      <line x1="28.5" y1="30.5" x2="38" y2="40" stroke="#00e5a0" stroke-width="3.5" stroke-linecap="round"/>
-    </svg>
+    <!-- NUEVA ETIQUETA IMG: Reemplaza el antiguo SVG e inserta tu logo transparente de Canva -->
+    <img src="Diseño_sin_título-removebg-preview.png" alt="Logo SEO + AI" style="height:38px; width:auto; object-fit:contain; display:block; flex-shrink:0;">
     <span class="nav-wordmark">
       <span class="nw-bracket">&lt;</span><span class="nw-light">SEO </span><span class="nw-light">+ </span><span class="nw-accent">AI</span><span class="nw-bracket">/&gt;</span>
     </span>
@@ -505,8 +503,7 @@ footer{border-top:1px solid var(--border);padding:2rem 4rem;display:flex;justify
     <!-- RIGHT: stats + tools -->
     <div class="hero-right">
       <div class="hero-stats-card">
-        <div class="hstat"><span class="hstat-num counter" data-target="25">0</span>%<span class="hstat-label">Aumento promedio<br>de tráfico orgánico</span></div>
-        <div class="hstat"><span class="hstat-num counter" data-target="3">0</span><span class="hstat-label">Clientes<br>Internacionales</span></div>
+        <div class="hstat"><span class="hstat-num counter" data-target="25">0</span>%+<span class="hstat-label">Aumento promedio<br>de tráfico orgánico</span></div>
         <div class="hstat"><span class="hstat-num counter" data-target="95">0</span>%+<span class="hstat-label">Tasa de resolución<br>de errores técnicos</span></div>
         <div class="hstat"><span class="hstat-num counter" data-target="1">0</span>+<span class="hstat-label">Año de experiencia<br>en SEO</span></div>
       </div>
@@ -601,7 +598,7 @@ footer{border-top:1px solid var(--border);padding:2rem 4rem;display:flex;justify
         <a href="https://rdttaq.com" target="_blank" class="client-url">rdttaq.com ↗</a>
       </div>
       <div class="client-kpis">
-        <div class="kpi-box"><span class="kpi-val">+31%</span><span class="kpi-label">Tráfico orgánico</span></div>
+        <div class="kpi-box"><span class="kpi-val">+42%</span><span class="kpi-label">Tráfico orgánico</span></div>
         <div class="kpi-box"><span class="kpi-val blue">18</span><span class="kpi-label">Keywords top 10</span></div>
         <div class="kpi-box"><span class="kpi-val" style="color:var(--yellow)">3</span><span class="kpi-label">Posición media</span></div>
       </div>
@@ -643,7 +640,7 @@ footer{border-top:1px solid var(--border);padding:2rem 4rem;display:flex;justify
           <div class="work-icon purple">📊</div>
           <h4>Análisis & Estrategia de Contenido</h4>
         </div>
-        <p>Investigación de palabras clave con Ahrefs para identificar oportunidades informacionales en el blogue. Elaboración de brief de contenido para artículos sobre "contestation CNESST", "maladie professionnelle" y "perte auditive au travail". Seguimiento de posiciones e impresiones via Google Search Console.</p>
+        <p>Investigación de palabras clave con Ahrefs para identificar oportunidades informacionales en el blogue. Elaboración de brief de contenido para artículos sobre "contestation CNESST", "maladie professionnelle" y "perte auditive au trabajo". Seguimiento de posiciones e impresiones via Google Search Console.</p>
         <div class="work-tags">
           <span class="wtag purple">Ahrefs</span><span class="wtag purple">GSC</span><span class="wtag purple">Content brief</span>
         </div>
@@ -654,24 +651,27 @@ footer{border-top:1px solid var(--border);padding:2rem 4rem;display:flex;justify
     <div class="chart-row">
       <div class="chart-box">
         <h5>📈 Evolución de tráfico orgánico mensual</h5>
-        <svg class="line-graph" viewBox="0 0 400 100" preserveAspectRatio="none" height="100">
+        <svg class="line-graph" viewBox="0 0 400 140" preserveAspectRatio="xMidYMid meet">
           <defs>
             <linearGradient id="grad1" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stop-color="#00e5a0" stop-opacity="0.3"/>
+              <stop offset="0%" stop-color="#00e5a0" stop-opacity="0.25"/>
               <stop offset="100%" stop-color="#00e5a0" stop-opacity="0"/>
             </linearGradient>
           </defs>
-          <path d="M0,85 C30,80 60,75 90,68 C120,60 150,55 180,48 C210,40 240,35 270,28 C300,22 330,15 360,10 L400,8 L400,100 L0,100Z" fill="url(#grad1)"/>
-          <path d="M0,85 C30,80 60,75 90,68 C120,60 150,55 180,48 C210,40 240,35 270,28 C300,22 330,15 360,10 L400,8" stroke="#00e5a0" stroke-width="2" fill="none"/>
-          <circle cx="0" cy="85" r="3" fill="#00e5a0"/>
-          <circle cx="90" cy="68" r="3" fill="#00e5a0"/>
-          <circle cx="180" cy="48" r="3" fill="#00e5a0"/>
-          <circle cx="270" cy="28" r="3" fill="#00e5a0"/>
-          <circle cx="400" cy="8" r="3" fill="#00e5a0"/>
-          <text x="0" y="98" fill="#7a9188" font-size="9" font-family="DM Sans">Mes 1</text>
-          <text x="155" y="98" fill="#7a9188" font-size="9" font-family="DM Sans">Mes 6</text>
-          <text x="360" y="98" fill="#7a9188" font-size="9" font-family="DM Sans">Mes 12</text>
-          <text x="340" y="5" fill="#00e5a0" font-size="9" font-weight="bold" font-family="DM Sans">+31%</text>
+          <rect x="308" y="4" width="48" height="18" rx="5" fill="rgba(0,229,160,0.18)"/>
+          <text x="311" y="17" fill="#00e5a0" font-size="10.5" font-weight="bold" font-family="DM Sans">+42%</text>
+          <path d="M8,104 C40,102 70,98 100,92 C128,86 152,80 178,72 C204,64 228,56 254,48 C278,41 308,35 338,30 L378,27 L378,115 L8,115Z" fill="url(#grad1)"/>
+          <path d="M8,104 C40,102 70,98 100,92 C128,86 152,80 178,72 C204,64 228,56 254,48 C278,41 308,35 338,30 L378,27" stroke="#00e5a0" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="8"   cy="104" r="3.5" fill="#00e5a0"/>
+          <circle cx="100" cy="92"  r="3"   fill="#00e5a0" opacity="0.8"/>
+          <circle cx="178" cy="72"  r="3"   fill="#00e5a0" opacity="0.8"/>
+          <circle cx="254" cy="48"  r="3"   fill="#00e5a0" opacity="0.8"/>
+          <circle cx="378" cy="27"  r="3.5" fill="#00e5a0"/>
+          <text x="4"   y="128" fill="#7a9188" font-size="8.5" font-family="DM Sans">Mes 1</text>
+          <text x="88"  y="128" fill="#7a9188" font-size="8.5" font-family="DM Sans">Mes 3</text>
+          <text x="164" y="128" fill="#7a9188" font-size="8.5" font-family="DM Sans">Mes 6</text>
+          <text x="240" y="128" fill="#7a9188" font-size="8.5" font-family="DM Sans">Mes 9</text>
+          <text x="353" y="128" fill="#7a9188" font-size="8.5" font-family="DM Sans">Mes 12</text>
         </svg>
       </div>
       <div class="chart-box">
@@ -700,7 +700,7 @@ footer{border-top:1px solid var(--border);padding:2rem 4rem;display:flex;justify
         <a href="https://www.cpl.com.pe" target="_blank" class="client-url">cpl.com.pe ↗</a>
       </div>
       <div class="client-kpis">
-        <div class="kpi-box"><span class="kpi-val">+22%</span><span class="kpi-label">Tráfico orgánico</span></div>
+        <div class="kpi-box"><span class="kpi-val">+25%</span><span class="kpi-label">Tráfico orgánico</span></div>
         <div class="kpi-box"><span class="kpi-val blue">24</span><span class="kpi-label">Keywords posicionadas</span></div>
         <div class="kpi-box"><span class="kpi-val" style="color:var(--red)">-48%</span><span class="kpi-label">Errores de crawl</span></div>
       </div>
@@ -752,23 +752,27 @@ footer{border-top:1px solid var(--border);padding:2rem 4rem;display:flex;justify
     <div class="chart-row">
       <div class="chart-box">
         <h5>📈 Evolución de tráfico orgánico mensual</h5>
-        <svg class="line-graph" viewBox="0 0 400 100" preserveAspectRatio="none" height="100">
+        <svg class="line-graph" viewBox="0 0 400 140" preserveAspectRatio="xMidYMid meet">
           <defs>
             <linearGradient id="grad2" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stop-color="#4da6ff" stop-opacity="0.3"/>
+              <stop offset="0%" stop-color="#4da6ff" stop-opacity="0.25"/>
               <stop offset="100%" stop-color="#4da6ff" stop-opacity="0"/>
             </linearGradient>
           </defs>
-          <path d="M0,88 C40,85 80,82 120,75 C160,68 200,60 240,50 C280,40 320,30 360,22 L400,18 L400,100 L0,100Z" fill="url(#grad2)"/>
-          <path d="M0,88 C40,85 80,82 120,75 C160,68 200,60 240,50 C280,40 320,30 360,22 L400,18" stroke="#4da6ff" stroke-width="2" fill="none"/>
-          <circle cx="0" cy="88" r="3" fill="#4da6ff"/>
-          <circle cx="120" cy="75" r="3" fill="#4da6ff"/>
-          <circle cx="240" cy="50" r="3" fill="#4da6ff"/>
-          <circle cx="400" cy="18" r="3" fill="#4da6ff"/>
-          <text x="0" y="98" fill="#7a9188" font-size="9" font-family="DM Sans">Mes 1</text>
-          <text x="155" y="98" fill="#7a9188" font-size="9" font-family="DM Sans">Mes 6</text>
-          <text x="360" y="98" fill="#7a9188" font-size="9" font-family="DM Sans">Mes 12</text>
-          <text x="350" y="13" fill="#4da6ff" font-size="9" font-weight="bold" font-family="DM Sans">+22%</text>
+          <rect x="308" y="4" width="48" height="18" rx="5" fill="rgba(77,166,255,0.18)"/>
+          <text x="311" y="17" fill="#4da6ff" font-size="10.5" font-weight="bold" font-family="DM Sans">+25%</text>
+          <path d="M8,104 L102,70 C120,66 130,68 148,72 C166,76 174,72 210,58 C240,46 320,36 378,31 L378,118 L8,118Z" fill="url(#grad2)"/>
+          <path d="M8,104 L102,70 C120,66 130,68 148,72 C166,76 174,72 210,58 C240,46 320,36 378,31" stroke="#4da6ff" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="8"   cy="104" r="3.5" fill="#4da6ff"/>
+          <circle cx="102" cy="70"  r="3"   fill="#4da6ff"/>
+          <circle cx="148" cy="72"  r="3"   fill="#4da6ff"/>
+          <circle cx="210" cy="58"  r="3"   fill="#4da6ff"/>
+          <circle cx="378" cy="31"  r="3.5" fill="#4da6ff"/>
+          <text x="4"   y="131" fill="#7a9188" font-size="8.5" font-family="DM Sans">Mes 1</text>
+          <text x="91"  y="131" fill="#7a9188" font-size="8.5" font-family="DM Sans">Mes 2</text>
+          <text x="182" y="131" fill="#7a9188" font-size="8.5" font-family="DM Sans">Mes 3</text>
+          <text x="274" y="131" fill="#7a9188" font-size="8.5" font-family="DM Sans">Mes 4</text>
+          <text x="355" y="131" fill="#7a9188" font-size="8.5" font-family="DM Sans">Mes 5</text>
         </svg>
       </div>
       <div class="chart-box">
@@ -792,12 +796,12 @@ footer{border-top:1px solid var(--border);padding:2rem 4rem;display:flex;justify
     <div class="client-header">
       <div class="client-logo-box">COCHEZ<br>SANTÉ</div>
       <div class="client-info">
-        <h3>Cochez Santé – Massage en entreprise</h3>
+        <h3>Cochez Santé – Massage en empresa</h3>
         <p>Servicios de bienestar corporativo & masajes · Montréal, Canadá</p>
         <a href="https://cochezsante.com" target="_blank" class="client-url">cochezsante.com ↗</a>
       </div>
       <div class="client-kpis">
-        <div class="kpi-box"><span class="kpi-val">+28%</span><span class="kpi-label">Tráfico orgánico</span></div>
+        <div class="kpi-box"><span class="kpi-val">+31%</span><span class="kpi-label">Tráfico orgánico</span></div>
         <div class="kpi-box"><span class="kpi-val blue">21</span><span class="kpi-label">Keywords posicionadas</span></div>
         <div class="kpi-box"><span class="kpi-val" style="color:var(--purple)">2</span><span class="kpi-label">Featured Snippets</span></div>
       </div>
@@ -849,24 +853,33 @@ footer{border-top:1px solid var(--border);padding:2rem 4rem;display:flex;justify
     <div class="chart-row">
       <div class="chart-box">
         <h5>📈 Evolución de tráfico orgánico mensual</h5>
-        <svg class="line-graph" viewBox="0 0 400 100" preserveAspectRatio="none" height="100">
+        <svg class="line-graph" viewBox="0 0 400 140" preserveAspectRatio="xMidYMid meet">
           <defs>
             <linearGradient id="grad3" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stop-color="#a78bfa" stop-opacity="0.3"/>
+              <stop offset="0%" stop-color="#a78bfa" stop-opacity="0.25"/>
               <stop offset="100%" stop-color="#a78bfa" stop-opacity="0"/>
             </linearGradient>
           </defs>
-          <path d="M0,90 C20,88 50,85 90,78 C130,70 160,62 200,50 C240,38 280,25 320,16 L400,10 L400,100 L0,100Z" fill="url(#grad3)"/>
-          <path d="M0,90 C20,88 50,85 90,78 C130,70 160,62 200,50 C240,38 280,25 320,16 L400,10" stroke="#a78bfa" stroke-width="2" fill="none"/>
-          <circle cx="0" cy="90" r="3" fill="#a78bfa"/>
-          <circle cx="100" cy="76" r="3" fill="#a78bfa"/>
-          <circle cx="200" cy="50" r="3" fill="#a78bfa"/>
-          <circle cx="300" cy="20" r="3" fill="#a78bfa"/>
-          <circle cx="400" cy="10" r="3" fill="#a78bfa"/>
-          <text x="0" y="98" fill="#7a9188" font-size="9" font-family="DM Sans">Mes 1</text>
-          <text x="155" y="98" fill="#7a9188" font-size="9" font-family="DM Sans">Mes 6</text>
-          <text x="360" y="98" fill="#7a9188" font-size="9" font-family="DM Sans">Mes 12</text>
-          <text x="350" y="5" fill="#a78bfa" font-size="9" font-weight="bold" font-family="DM Sans">+28%</text>
+          <rect x="308" y="4" width="48" height="18" rx="5" fill="rgba(167,139,250,0.18)"/>
+          <text x="311" y="17" fill="#a78bfa" font-size="10.5" font-weight="bold" font-family="DM Sans">+31%</text>
+          <path d="M8,100 L62,98 C78,97 88,94 116,96 C132,97 140,100 170,92 C196,82 224,66 270,50 C306,38 346,33 378,30 L378,118 L8,118Z" fill="url(#grad3)"/>
+          <path d="M8,100 L62,98 C78,97 88,94 116,96 C132,97 140,100 170,92 C196,82 224,66 270,50 C306,38 346,33 378,30" stroke="#a78bfa" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="8"   cy="100" r="3.5" fill="#a78bfa"/>
+          <circle cx="62"  cy="98"  r="3"   fill="#a78bfa"/>
+          <circle cx="116" cy="96"  r="3"   fill="#a78bfa"/>
+          <circle cx="170" cy="92"  r="3"   fill="#a78bfa"/>
+          <circle cx="224" cy="66"  r="3"   fill="#a78bfa"/>
+          <circle cx="270" cy="50"  r="3"   fill="#a78bfa"/>
+          <circle cx="332" cy="33"  r="3"   fill="#a78bfa"/>
+          <circle cx="378" cy="30"  r="3.5" fill="#a78bfa"/>
+          <text x="4"   y="131" fill="#7a9188" font-size="8" font-family="DM Sans">Mes 1</text>
+          <text x="49"  y="131" fill="#7a9188" font-size="8" font-family="DM Sans">Mes 2</text>
+          <text x="103" y="131" fill="#7a9188" font-size="8" font-family="DM Sans">Mes 3</text>
+          <text x="157" y="131" fill="#7a9188" font-size="8" font-family="DM Sans">Mes 4</text>
+          <text x="211" y="131" fill="#7a9188" font-size="8" font-family="DM Sans">Mes 5</text>
+          <text x="257" y="131" fill="#7a9188" font-size="8" font-family="DM Sans">Mes 6</text>
+          <text x="319" y="131" fill="#7a9188" font-size="8" font-family="DM Sans">Mes 7</text>
+          <text x="358" y="131" fill="#7a9188" font-size="8" font-family="DM Sans">Mes 8</text>
         </svg>
       </div>
       <div class="chart-box">
@@ -878,7 +891,7 @@ footer{border-top:1px solid var(--border);padding:2rem 4rem;display:flex;justify
             <tr><td>massage en entreprise Canada</td><td><span class="pos-badge p2">#4</span></td><td>720</td><td><span class="trend-up">▲ +9</span></td></tr>
             <tr><td>massothérapeute événements spéciaux</td><td><span class="pos-badge p1">#3</span></td><td>190</td><td><span class="trend-up">▲ +5</span></td></tr>
             <tr><td>massage sur table à domicile Montréal</td><td><span class="pos-badge p3">#6</span></td><td>310</td><td><span class="trend-up">▲ +7</span></td></tr>
-            <tr><td>bien-être au travail massage</td><td><span class="pos-badge p2">#5</span></td><td>140</td><td><span class="trend-up">▲ +10</span></td></tr>
+            <tr><td>bien-être au trabajo massage</td><td><span class="pos-badge p2">#5</span></td><td>140</td><td><span class="trend-up">▲ +10</span></td></tr>
           </tbody>
         </table>
       </div>
@@ -910,7 +923,7 @@ footer{border-top:1px solid var(--border);padding:2rem 4rem;display:flex;justify
     <div class="process-step" data-num="04">
       <div class="step-icon">📊</div>
       <h4>Monitoreo & Reporte</h4>
-      <p>Seguimiento mensual de posiciones, tráfico, impresiones y CTR via GSC y GA4. Reportes detallados con insights accionables y próximos pasos. Iteración continua.</p>
+      <p>Seguimiento mensual de posiciones, tráfico, impresiones y CTR via GSC y GA4. Reportes detallados con insights accionables y próximos pasos.</p>
     </div>
   </div>
 </section>
@@ -936,7 +949,7 @@ footer{border-top:1px solid var(--border);padding:2rem 4rem;display:flex;justify
 
 <footer>
   <span>© 2026 Sebastian Ascencio · Analista SEO</span>
-  <span style="color:var(--accent)">Sogamoso, Colombia</span>
+  <span style="color:var(--accent)">Colombia</span>
 </footer>
 
 <script>
@@ -980,7 +993,6 @@ function animateCounter(el) {
 const observer = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
-
       entry.target.querySelectorAll('.counter').forEach(c => animateCounter(c));
       observer.unobserve(entry.target);
     }
